@@ -82,10 +82,10 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, 290, 46);
     self.backgroundColor = [UIColor clearColor];
 
-    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:self.bounds];
-    backgroundImageView.image = [[UIImage imageNamed:@"textfield"]
-            resizableImageWithCapInsets:UIEdgeInsetsMake(0, 8, 0, 8)];
-    [self addSubview:backgroundImageView];
+//    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:self.bounds];
+//    backgroundImageView.image = [[UIImage imageNamed:@"textfield"]
+//            resizableImageWithCapInsets:UIEdgeInsetsMake(0, 8, 0, 8)];
+//    [self addSubview:backgroundImageView];
 
     self.innerView = [[UIView alloc] initWithFrame:CGRectMake(40, 12, self.frame.size.width - 40, 20)];
     self.innerView.clipsToBounds = YES;
@@ -97,9 +97,9 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
 
     [self.innerView addSubview:self.cardNumberField];
 
-    UIImageView *gradientImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 12, 34)];
-    gradientImageView.image = [UIImage imageNamed:@"gradient"];
-    [self.innerView addSubview:gradientImageView];
+//    UIImageView *gradientImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 12, 34)];
+//    gradientImageView.image = [UIImage imageNamed:@"gradient"];
+//    [self.innerView addSubview:gradientImageView];
 
     self.opaqueOverGradientView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 9, 34)];
     self.opaqueOverGradientView.backgroundColor = [UIColor colorWithRed:0.9686 green:0.9686
@@ -353,9 +353,15 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
 - (void)setPlaceholderToCardType
 {
     PTKCardNumber *cardNumber = [PTKCardNumber cardNumberWithString:self.cardNumberField.text];
+    NSString *cardTypeName = [self cardTypeForCardNumber:cardNumber];
+    [self setPlaceholderViewImage:[UIImage imageNamed:cardTypeName]];
+}
+
+- (NSString *)cardTypeForCardNumber:(PTKCardNumber *)cardNumber
+{
     PTKCardType cardType = [cardNumber cardType];
     NSString *cardTypeName = @"placeholder";
-
+    
     switch (cardType) {
         case PTKCardTypeAmex:
             cardTypeName = @"amex";
@@ -378,8 +384,8 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
         default:
             break;
     }
-
-    [self setPlaceholderViewImage:[UIImage imageNamed:cardTypeName]];
+    
+    return cardTypeName;
 }
 
 #pragma mark - Delegates
