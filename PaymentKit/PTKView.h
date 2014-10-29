@@ -20,6 +20,7 @@
 @protocol PTKViewDelegate <NSObject>
 @optional
 - (void)paymentView:(PTKView *)paymentView withCard:(PTKCard *)card isValid:(BOOL)valid;
+- (void)paymentViewDidBeginEditing:(PTKView *)paymentView;
 @end
 
 @interface PTKView : UIView
@@ -40,6 +41,8 @@
 @property IBOutlet UIImageView *placeholderView;
 @property (nonatomic, weak) id <PTKViewDelegate> delegate;
 @property (readonly) PTKCard *card;
+
+@property (nonatomic) UIColor *inputTextColor;
 
 - (NSString *)cardTypeForCardNumber:(PTKCardNumber *)cardNumber;
 
