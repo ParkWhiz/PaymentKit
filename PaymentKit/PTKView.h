@@ -14,6 +14,7 @@
 #import "PTKAddressZip.h"
 #import "PTKUSAddressZip.h"
 #import "PTKTextField.h"
+#import <Foundation/Foundation.h>
 
 @class PTKView, PTKTextField;
 
